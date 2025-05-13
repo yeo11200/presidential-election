@@ -28,7 +28,6 @@ const PolicyCard: React.FC<PolicyCardProps> = ({ policy, candidateColor }) => {
             <div>
               <div className="flex items-center gap-1 text-gray-500">
                 <span>효과력</span>
-                <PolicyMetricsHelpButton />
               </div>
               <div className="font-semibold">{policy.attack}%</div>
             </div>
