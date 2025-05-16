@@ -2,6 +2,7 @@ import React, { useMemo, useState, useRef, useEffect } from "react";
 import { candidatesData, Policy } from "../data/candidatesData";
 import PolicyCard from "./PolicyCard";
 import { PolicyMetricsHelpButton } from "./PolicyMetricsGuide";
+import PolicyDetail from "./PolicyDetail";
 
 // 정당 로고나 후보 이미지를 위한 상수 정의
 const CANDIDATE_IMAGES = {
@@ -77,6 +78,7 @@ const PolicyCardList: React.FC<PolicyCardListProps> = ({
   resetKey = 0,
 }) => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
   const categoryRefs = useRef<{ [key: string]: HTMLDivElement }>({});
 
   // resetKey가 변경되면 activeCategory를 null로 초기화
@@ -133,6 +135,16 @@ const PolicyCardList: React.FC<PolicyCardListProps> = ({
         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
+  };
+
+  // 정책 카드 클릭 핸들러
+  const handlePolicyClick = (policy: Policy) => {
+    setSelectedPolicy(policy);
+  };
+
+  // 정책 상세 팝업 닫기 핸들러
+  const handleCloseDetail = () => {
+    setSelectedPolicy(null);
   };
 
   if (!selectedCandidateData) {
@@ -232,15 +244,29 @@ const PolicyCardList: React.FC<PolicyCardListProps> = ({
           </h2>
           <div className="space-y-4">
             {policies.map((policy) => (
-              <PolicyCard
+              <div
                 key={policy.id}
-                policy={policy}
-                candidateColor={selectedCandidateData.color}
-              />
+                onClick={() => handlePolicyClick(policy)}
+                className="cursor-pointer"
+              >
+                <PolicyCard
+                  policy={policy}
+                  candidateColor={selectedCandidateData.color}
+                />
+              </div>
             ))}
           </div>
         </div>
       ))}
+
+      {/* 정책 상세 팝업 */}
+      {selectedPolicy && (
+        <PolicyDetail
+          policy={selectedPolicy}
+          candidateColor={selectedCandidateData.color}
+          onClose={handleCloseDetail}
+        />
+      )}
     </div>
   );
 };

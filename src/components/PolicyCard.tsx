@@ -10,7 +10,7 @@ interface PolicyCardProps {
 
 const PolicyCard: React.FC<PolicyCardProps> = ({ policy, candidateColor }) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md p-5 mb-6 hover:shadow-lg hover:scale-[1.01] transition">
+    <div className="bg-white rounded-2xl shadow-md p-5 mb-6 hover:shadow-lg hover:scale-[1.01] transition cursor-pointer">
       <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center mb-2 gap-2">
