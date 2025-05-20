@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import PolicyCardList from "./PolicyCardList";
 import CandidateNewsList from "./CandidateNewsList";
 import CandidateHeader from "./CandidateHeader";
+import CandidateVoteBox from "./CandidateVoteBox";
 import { candidatesData } from "../data/candidatesData";
 
 const CandidateMainTabs = ({
@@ -44,6 +45,11 @@ const CandidateMainTabs = ({
         categoryCount={categoryCount}
         newsCount={newsCount}
       />
+
+      {/* 모바일에서만 보이는 투표 UI */}
+      <div className="md:hidden mb-4">
+        <CandidateVoteBox selectedCandidateId={selectedCandidate} />
+      </div>
 
       {/* 탭 버튼 */}
       <div className="flex border-b mb-4">

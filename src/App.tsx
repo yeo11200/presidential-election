@@ -3,6 +3,7 @@ import "./App.css";
 import LeftSideTab from "./components/LeftSideTab";
 import CandidateMainTabs from "./components/CandidateMainTabs";
 import MobileHeader from "./components/MobileHeader";
+import CandidateVoteBox from "./components/CandidateVoteBox";
 import { candidatesData } from "./data/candidatesData";
 
 function App() {
@@ -58,12 +59,18 @@ function App() {
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Left Side Tab - hidden on mobile, visible on md and up */}
-          <div className="hidden md:block md:w-64 flex-shrink-0">
+          {/* 왼쪽 사이드바 영역 - 모바일에서는 숨김 */}
+          <div className="hidden md:flex md:flex-col md:w-64 flex-shrink-0 gap-4">
+            {/* 후보 목록 */}
             <LeftSideTab
               selectedCandidate={selectedCandidate}
               onCandidateChange={handleCandidateChange}
             />
+
+            {/* PC에서만 보이는 투표 UI */}
+            <div className="hidden md:block">
+              <CandidateVoteBox selectedCandidateId={selectedCandidate} />
+            </div>
           </div>
 
           {/* Main Tabs: 공약/뉴스 */}
