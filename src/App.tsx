@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import LeftSideTab from "./components/LeftSideTab";
-import PolicyCardList from "./components/PolicyCardList";
+import CandidateMainTabs from "./components/CandidateMainTabs";
 import MobileHeader from "./components/MobileHeader";
 import { candidatesData } from "./data/candidatesData";
 
@@ -66,12 +66,9 @@ function App() {
             />
           </div>
 
-          {/* Policy Card List */}
+          {/* Main Tabs: 공약/뉴스 */}
           <div className="flex-1">
-            <PolicyCardList
-              selectedCandidate={selectedCandidate}
-              resetKey={categoryResetKey}
-            />
+            <CandidateMainTabs selectedCandidate={selectedCandidate} />
           </div>
         </div>
       </div>

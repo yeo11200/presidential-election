@@ -24,50 +24,6 @@ const FallbackIcon = ({ name, color }: { name: string; color: string }) => {
   );
 };
 
-// 후보 아바타 컴포넌트 - 이미지 로드 실패 시 FallbackIcon 사용
-const CandidateAvatar = ({
-  id,
-  name,
-  color,
-  size = "medium",
-}: {
-  id: string;
-  name: string;
-  color: string;
-  size?: "small" | "medium" | "large";
-}) => {
-  const [imageError, setImageError] = useState(false);
-  const imagePath = CANDIDATE_IMAGES[id as keyof typeof CANDIDATE_IMAGES];
-
-  const sizeClasses = {
-    small: "w-6 h-6",
-    medium: "w-8 h-8",
-    large: "w-10 h-10",
-  };
-
-  const sizeClass = sizeClasses[size];
-
-  if (imageError || !imagePath) {
-    return (
-      <div
-        className={`${sizeClass} rounded-full flex items-center justify-center text-white font-bold`}
-        style={{ backgroundColor: color }}
-      >
-        {name.charAt(0)}
-      </div>
-    );
-  }
-
-  return (
-    <img
-      src={imagePath}
-      alt={name}
-      className={`${sizeClass} rounded-full object-cover`}
-      onError={() => setImageError(true)}
-    />
-  );
-};
-
 interface PolicyCardListProps {
   selectedCandidate: string;
   resetKey?: number; // 카테고리 초기화를 위한 키 값 (옵션)
@@ -153,24 +109,6 @@ const PolicyCardList: React.FC<PolicyCardListProps> = ({
 
   return (
     <div>
-      <div className="flex items-center mb-6">
-        <CandidateAvatar
-          id={selectedCandidateData.id}
-          name={selectedCandidateData.name}
-          color={selectedCandidateData.color}
-          size="large"
-        />
-        <div className="ml-3">
-          <h1 className="text-2xl font-bold">
-            {selectedCandidateData.name}의 정책
-          </h1>
-          <p className="text-sm text-gray-500">
-            총 {selectedCandidateData.policies.length}개 정책,{" "}
-            {Object.keys(categoryCounts).length}개 분야
-          </p>
-        </div>
-      </div>
-
       {/* 정책 평가 지표 설명 */}
       <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6">
         <div className="flex justify-between items-center">
