@@ -115,9 +115,8 @@ const CandidateNewsList: React.FC<CandidateNewsListProps> = ({
             dangerouslySetInnerHTML={{ __html: item.title }}
           />
 
-          <div className="text-sm text-gray-600">
-            {item.summary || item.content}
-          </div>
+          <div className="text-sm text-gray-600"             dangerouslySetInnerHTML={{ __html: item.summary || item.content }} />
+
           {item.link && (
             <div className="mt-2 text-right">
               <a
