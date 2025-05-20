@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { candidatesData } from "../data/candidatesData";
 
-const BASE_URL = "https://portfolio-backend-6bdh.onrender.com/api/";
+const BASE_URL = `${process.env.REACT_APP_API_URL}/api/`;
 
 export const api = axios.create({
   baseURL: BASE_URL,
